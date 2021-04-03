@@ -1,6 +1,13 @@
+:root {
+    --base: #d4a6a6;
+    --spacing: 10px;
+    --blur: 8px;
+
+}
+
 body {
     text-align: center;
-    background: #193549;
+    background: #d14444;
     color: white;
     font-family: 'helvetica neue', sans-serif;
     font-weight: 100;
@@ -13,4 +20,15 @@ body {
 
   input {
     width: 100px;
+  }
+
+  img{
+      width: 800px;
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+  }
+
+  .hl{
+      color: var(--base);
   }
