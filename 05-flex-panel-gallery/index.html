@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Flex Panels</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spartan:wght@100&display=swap"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <style>
+      html {
+        box-sizing: border-box;
+        background: #ffc600;
+        font-family: 'Spartan', sans-serif;
+        font-size: 20px;
+        font-weight: 200;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      .panels {
+        min-height: 100vh;
+        overflow: hidden;
+        display: flex;
+      }
+
+      .panel {
+        background: #6b0f9c;
+        box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
+        color: white;
+        text-align: center;
+        align-items: center;
+        /* Safari transitionend event.propertyName === flex */
+        /* Chrome + FF transitionend event.propertyName === flex-grow */
+        transition: font-size 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+          flex 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11), background 0.2s;
+        font-size: 20px;
+        background-size: cover;
+        background-position: center;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .panel1 {
+        background-image: url(./images/01.jpg);
+      }
+      .panel2 {
+        background-image: url(./images/02.jpg);
+      }
+      .panel3 {
+        background-image: url(./images/03.jpg);
+      }
+      .panel4 {
+        background-image: url(./images/04.jpg);
+      }
+      .panel5 {
+        background-image: url(./images/05.jpg);
+      }
+
+      /* Flex Children */
+      .panel > * {
+        margin: 0;
+        width: 100%;
+        transition: transform 0.5s;
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url(./);
+      }
+
+      .panel > *:first-child {
+        transform: translateY(-100%);
+      }
+      .panel.open-active > *:first-child {
+        transform: translateY(0);
+      }
+      .panel > *:last-child {
+        transform: translateY(100%);
+      }
+      .panel.open-active > *:last-child {
+        transform: translateY(0);
+      }
+
+      .panel p {
+        text-transform: uppercase;
+        font-family: 'Spartan', sans-serif;
+        text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+        font-size: 1.5em;
+      }
+
+      .panel p:nth-child(2) {
+        font-size: 2.5em;
+      }
+
+      .panel.open {
+        flex: 5;
+        font-size: 40px;
+      }
+    </style>
+
+    <div class="panels">
+      <div class="panel panel1">
+        <p>Wait</p>
+        <p>No</p>
+        <p>More</p>
+      </div>
+      <div class="panel panel2">
+        <p>Let</p>
+        <p>Spring</p>
+        <p>In</p>
+      </div>
+      <div class="panel panel3">
+        <p>My heart</p>
+        <p>Skips</p>
+        <p>A beat</p>
+      </div>
+      <div class="panel panel4">
+        <p>Feel</p>
+        <p>Its</p>
+        <p>Warmth</p>
+      </div>
+      <div class="panel panel5">
+        <p>Your</p>
+        <p>Turn</p>
+        <p>To bloom</p>
+      </div>
+    </div>
+
+    <script>
+      const panels = document.querySelectorAll('.panel');
+
+      function toggleOpen() {
+        this.classList.toggle('open');
+      }
+
+      function toggleActive(e) {
+        console.log(e.propertyName);
+        if (e.propertyName.includes('flex')) {
+          this.classList.toggle('open-active');
+        }
+      }
+
+      panels.forEach((panel) => panel.addEventListener('click', toggleOpen));
+      panels.forEach((panel) =>
+        panel.addEventListener('transitionend', toggleActive)
+      );
+    </script>
+  </body>
+</html>
